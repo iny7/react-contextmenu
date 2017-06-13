@@ -1,59 +1,63 @@
 import React, { Component } from 'react'
-import { ContextMenu, MenuItem, SubMenu } from './ContextMenu'
-
-[
-  {
-
-  },
-  {
-
-  }
-]
+import { ContextMenu, MenuItem } from './ContextMenu'
 
 export default class App extends Component {
   constructor () {
     super()
     this.state = {
-      open: true
+      isOpen: true
+    }
+  }
+  handleClick = () => {
+    this.setState({ isOpen: false })
+  }
+  handleToggleMenu = (e) => {
+    e.preventDefault()
+    if (this.state.isOpen) {
+      this.setState({ isOpen: false })
+    } else {
+      this.setState({
+        isOpen: true,
+        left: e.pageX,
+        top: e.pageY
+      })
     }
   }
 
-  handleToggleMenu = () => {
-    this.setState({ open: !this.state.open })
-  }
-
   render() {
-    const { open } = this.state
+    const { isOpen, left, top } = this.state
 
     return (
-      <div className="App" onClick={this.handleToggleMenu}>
-        <ContextMenu open={open}>
+      <div className="App" onClick={this.handleClick} onContextMenu={this.handleToggleMenu}>
+        <ContextMenu isOpen={isOpen} left={left} top={top}>
           <MenuItem style={{ }}>
-            <span>菜单项1</span>
-            <i>箭头</i>
+            <span>MenuItem1</span>
+            <i>arrow</i>
 
             <ContextMenu>
               <MenuItem>
-                <span>子菜单项1</span>
-                <i>箭头</i>
+                <span>MenuItem</span>
+                <i>arrow</i>
               </MenuItem>
               <MenuItem>
-                <span>子菜单项1</span>
-                <i>箭头</i>
+                <span>MenuItem</span>
+                <i>arrow</i>
               </MenuItem>
             </ContextMenu>
 
           </MenuItem>
 
+        {/*
           <MenuItem>
-            <span>菜单项2</span>
-            <i>箭头</i>
+            <span>MenuItem</span>
+            <i>arrow</i>
           </MenuItem>
 
           <MenuItem>
-            <span>菜单项3</span>
-            <i>箭头</i>
+            <span>MenuItem</span>
+            <i>arrow</i>
           </MenuItem>
+        */}
 
         </ContextMenu>
       </div>

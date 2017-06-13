@@ -8,6 +8,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  transform-origin: 0 0;
+  user-select: none;
 }
 .menu-item {
   list-style: none;

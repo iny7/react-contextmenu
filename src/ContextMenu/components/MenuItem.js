@@ -6,6 +6,9 @@ export default class MenuItem extends PureComponent {
   }
   render () {
     const { children } = this.props
+    console.log(this.props)
+    console.log(this.props.children)
+
     return <li className="menu-item">{ children }</li>
   }
 }
